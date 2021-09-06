@@ -3,6 +3,7 @@ import "./App.css";
 import postsServices from "./service/posts";
 function App() {
   const [posts, setPosts] = useState([]);
+  const [postsRows, setpostsRows] = useState([]);
   const [loading, setLoading] = useState({
     loading: false,
     service: "undefined",
@@ -16,11 +17,14 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    setpostsRows(posts)
+  }, [posts]);
+
   const getPostTableRows = () => {
-    return posts != undefined && posts.length != 0 ? (
-      posts.map((post) => {
-        console.log(post);
-        let { postid, name, description } = post;
+    return postsRows != undefined && postsRows.length != 0 ? (
+      postsRows.map((postrow) => {
+        let { postid, name, description } = postrow;
         return (
           <tr>
             <td>{name}</td>
@@ -30,7 +34,7 @@ function App() {
                 type="button"
                 onClick={() => {
                   
-                  postsServices.deletePost(post).then(response =>{
+                  postsServices.deletePost(postrow).then(response =>{
                     if(!response.error){
                       let filterPosts = posts.filter(
                         (postToBeFilter) => postToBeFilter.postid != postid
@@ -66,7 +70,12 @@ function App() {
 
   const filterByName = (event)=>{
     const [searchInput] = event.target
-    console.log(searchInput.value)
+    let filterPosts = posts.filter(
+      (postToBeFilter) => 
+        postToBeFilter.name.toUpperCase().includes(searchInput.value.toUpperCase())
+      
+    );
+    setpostsRows(filterPosts);
     event.preventDefault();
   }
 
