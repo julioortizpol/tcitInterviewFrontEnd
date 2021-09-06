@@ -19,7 +19,7 @@ function App() {
   const getPostTableRows = () => {
     return posts != undefined && posts.length != 0 ? (
       posts.map((post) => {
-        console.log(post)
+        console.log(post);
         let { postid, name, description } = post;
         return (
           <tr>
@@ -29,9 +29,11 @@ function App() {
               <button
                 type="button"
                 onClick={() => {
-                  let filterPosts = posts.filter(post => post.postid != postid);
+                  let filterPosts = posts.filter(
+                    (post) => post.postid != postid
+                  );
                   postsServices.deletePost({ postid, name, description });
-                  setPosts(filterPosts)
+                  setPosts(filterPosts);
                 }}
               >
                 Eliminar
@@ -45,8 +47,26 @@ function App() {
     );
   };
 
+  const createPost = (event) =>{
+    const [nameInput, descriptionInput] = event.target
+    if(nameInput.value && descriptionInput.value){
+      console.log("bobo")
+    }
+    event.preventDefault();
+  }
+
   return (
     <div className="App">
+      <form>
+        <input
+          name="name"
+          placeholder="Nombre"
+          id="name"
+          type="text"
+          className="inputName"
+        />
+        <input type="submit" value="Crear" className="inputCreate" />
+      </form>
       <table>
         <tr>
           <th>Nombre</th>
@@ -55,14 +75,24 @@ function App() {
         </tr>
         {getPostTableRows()}
       </table>
-      <div class="your-class">
-
-  <label for="First_Name">First Name:</label>
-  <input name="first_name" id="First_Name" type="text" />
-  <label for="Name">Last Name:</label>
-  <input name="last_name" id="Last_Name" type="text" /> 
-
-</div>
+      <div>
+        <form onSubmit={createPost}>
+          <input
+            name="name"
+            placeholder="Nombre"
+            id="name"
+            type="text"
+            className="inputName"
+          />
+          <input
+            name="description"
+            placeholder="Descripcion"
+            id="description"
+            type="text"
+          />
+          <input type="submit" value="Crear" className="inputCreate" />
+        </form>
+      </div>
     </div>
   );
 }

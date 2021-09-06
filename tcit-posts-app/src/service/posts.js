@@ -27,4 +27,19 @@ const deletePost = (data)=> {
     });
 }
 
-export default {getPosts,deletePost}
+const createPost = (data)=> {
+  const {name,description} = data;
+  console.log(name)
+  console.log(description)
+  return axios
+    .post(`${API_URL}/posts/`,{name,description})
+    .then((response) => {
+      return response
+    }).catch((error) => {
+      console.log('Post not created Error: ', error)
+      return []
+    });
+}
+
+
+export default {getPosts,deletePost,createPost}
