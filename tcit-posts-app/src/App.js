@@ -29,11 +29,15 @@ function App() {
               <button
                 type="button"
                 onClick={() => {
-                  let filterPosts = posts.filter(
-                    (post) => post.postid != postid
-                  );
-                  postsServices.deletePost({ postid, name, description });
-                  setPosts(filterPosts);
+                  
+                  postsServices.deletePost(post).then(response =>{
+                    if(!response.error){
+                      let filterPosts = posts.filter(
+                        (postToBeFilter) => postToBeFilter.postid != postid
+                      );
+                      setPosts(filterPosts);
+                    }
+                  })
                 }}
               >
                 Eliminar
@@ -50,22 +54,33 @@ function App() {
   const createPost = (event) =>{
     const [nameInput, descriptionInput] = event.target
     if(nameInput.value && descriptionInput.value){
-      console.log("bobo")
+      let post = {name:nameInput.value,description:descriptionInput.value}
+      postsServices.createPost(post).then(response =>{
+        if(!response.error){
+          setPosts([...posts, post]);
+        }
+      })
     }
+    event.preventDefault();
+  }
+
+  const filterByName = (event)=>{
+    const [searchInput] = event.target
+    console.log(searchInput.value)
     event.preventDefault();
   }
 
   return (
     <div className="App">
-      <form>
+      <form onSubmit = {filterByName}>
         <input
-          name="name"
-          placeholder="Nombre"
-          id="name"
+          name="search"
+          placeholder="Filtro de nombre"
+          id="search"
           type="text"
-          className="inputName"
+          className="inputSeacrh"
         />
-        <input type="submit" value="Crear" className="inputCreate" />
+        <input type="submit" value="Buscar" className="inputSubmit" />
       </form>
       <table>
         <tr>
@@ -90,7 +105,7 @@ function App() {
             id="description"
             type="text"
           />
-          <input type="submit" value="Crear" className="inputCreate" />
+          <input type="submit" value="Crear" className="inputSubmit" />
         </form>
       </div>
     </div>

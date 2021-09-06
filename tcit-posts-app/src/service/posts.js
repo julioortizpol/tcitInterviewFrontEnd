@@ -23,7 +23,7 @@ const deletePost = (data)=> {
       return response
     }).catch((error) => {
       console.log('Post not deleted Error: ', error)
-      return []
+      return {error:error}
     });
 }
 
@@ -37,7 +37,7 @@ const createPost = (data)=> {
       return response
     }).catch((error) => {
       console.log('Post not created Error: ', error)
-      return []
+      return {error:error}
     });
 }
 

@@ -31,9 +31,13 @@ input {
 }
 
 
-.inputCreate{
+.inputSubmit{
   float:right;
 }
 
+.inputSeacrh{
+  width: 40%;
+  float:left;
+}
 
 
