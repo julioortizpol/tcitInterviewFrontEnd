@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import postsServices from "./service/posts";
 import {useSelector} from 'react-redux';
-
-
+import PostsList from './components/postsList';
+import PostSearch from './components/postSearch';
+import CreatePost from "./components/createPost";
 function App() {
   const reduxState = useSelector(state =>state)
   const [posts, setPosts] = useState([]);
@@ -85,42 +86,9 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit = {filterByName}>
-        <input
-          name="search"
-          placeholder="Filtro de nombre"
-          id="search"
-          type="text"
-          className="inputSeacrh"
-        />
-        <input type="submit" value="Buscar" className="inputSubmit" />
-      </form>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Decripcion</th>
-          <th>Accion</th>
-        </tr>
-        {getPostTableRows()}
-      </table>
-      <div>
-        <form onSubmit={createPost}>
-          <input
-            name="name"
-            placeholder="Nombre"
-            id="name"
-            type="text"
-            className="inputName"
-          />
-          <input
-            name="description"
-            placeholder="Descripcion"
-            id="description"
-            type="text"
-          />
-          <input type="submit" value="Crear" className="inputSubmit" />
-        </form>
-      </div>
+        <PostSearch/>
+        <PostsList/>
+        <CreatePost/>
     </div>
   );
 }
