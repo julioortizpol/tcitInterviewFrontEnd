@@ -1,14 +1,16 @@
- const postsReducer = (state = "klk", action)=>{
+import { GET_POSTS, DELETE_POSTS, CREATE_POSTS } from './types.js';
+
+
+const postsReducer = (state = [], action)=>{
     switch(action.type){
-        case 'delete':
+        case GET_POSTS:
+            return [...action.payload]
+        case DELETE_POSTS:
             return "klk"
-        case 'get':
+        case CREATE_POSTS:
             return "klk"
-        case 'create':
-            return "klk"
-        case 'search':
-            return "klk"
-            
+        default:
+            return state;
     }
 }
 
