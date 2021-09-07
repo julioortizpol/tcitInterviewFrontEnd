@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import postsServices from "./service/posts";
+import {useSelector} from 'react-redux';
+
+
 function App() {
+  const reduxState = useSelector(state =>state)
   const [posts, setPosts] = useState([]);
   const [postsRows, setpostsRows] = useState([]);
   const [loading, setLoading] = useState({
@@ -11,7 +15,6 @@ function App() {
 
   useEffect(() => {
     postsServices.getPosts().then((posts) => {
-      console.log("Posts: " + posts);
       setLoading({ loading: true, service: "undefined" });
       setPosts(posts);
     });
@@ -19,6 +22,7 @@ function App() {
 
   useEffect(() => {
     setpostsRows(posts)
+    console.log(reduxState)
   }, [posts]);
 
   const getPostTableRows = () => {

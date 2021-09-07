@@ -14,9 +14,6 @@ const getPosts = () => {
 
 const deletePost = (data)=> {
   const {postid,name,description} = data;
-  console.log(postid);
-  console.log(name)
-  console.log(description)
   return axios
     .delete(`${API_URL}/posts/${postid}`,{name,description})
     .then((response) => {
@@ -29,8 +26,6 @@ const deletePost = (data)=> {
 
 const createPost = (data)=> {
   const {name,description} = data;
-  console.log(name)
-  console.log(description)
   return axios
     .post(`${API_URL}/posts/`,{name,description})
     .then((response) => {
