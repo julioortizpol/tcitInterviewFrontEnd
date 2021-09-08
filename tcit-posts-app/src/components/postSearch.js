@@ -18,10 +18,6 @@ function PostSearch(){
      
     }
 
-    
-  
-
-
     return(
     <form onSubmit = {filterByName}>
         <input

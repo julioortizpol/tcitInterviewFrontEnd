@@ -10,13 +10,10 @@ function PostsList() {
     dispatch(getPosts());
   }, []);
 
-  
-
   return (
     <div>
       <table>
       <tbody>
-
         <tr>
           <th>Nombre</th>
           <th>Decripcion</th>

@@ -8,7 +8,7 @@ const getPosts = () => {
     })
     .catch((error) => {
       console.log("Posts Error: ", error);
-      return [];
+      return {error:error}
     });
 };
 
