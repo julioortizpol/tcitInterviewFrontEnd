@@ -1,18 +1,25 @@
 import {filterPosts} from '../actions/index'
-import { useDispatch, useSelector } from "react-redux";
-import {useEffect, useState, useRef} from 'react'
+import { useDispatch } from "react-redux";
 function PostSearch(){
   
     const dispatch = useDispatch();
-    const posts = useSelector(state => state.posts);
-    
-
 
     const filterByName = (event)=>{
       const [searchInput] = event.target
       dispatch(filterPosts({filterValue:searchInput.value}))
-        event.preventDefault();
+      event.preventDefault();
     }
+
+    const searchInputTextTrack = (event)=>{
+      if(event.target.value == ""){
+      dispatch(filterPosts({filterValue:""}))
+        
+      }
+     
+    }
+
+    
+  
 
 
     return(
@@ -21,8 +28,9 @@ function PostSearch(){
           name="search"
           placeholder="Filtro de nombre"
           id="search"
-          type="text"
+          type="search"
           className="inputSeacrh"
+          onChange = {searchInputTextTrack}
         />
         <input type="submit" value="Buscar" className="inputSubmit" />
       </form>)

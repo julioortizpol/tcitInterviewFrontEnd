@@ -37,9 +37,10 @@ export const createPost = (data)=>{
     return (dispatch) => {
         return postsServices.createPost(data).then(response =>{
             if(!response.error){
+                let [post] = response.data
                 dispatch({
                     type: CREATE_POSTS,
-                    payload: data
+                    payload: post
                 })
             }
           })

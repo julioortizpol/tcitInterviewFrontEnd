@@ -10,9 +10,13 @@ function PostsList() {
     dispatch(getPosts());
   }, []);
 
+  
+
   return (
     <div>
       <table>
+      <tbody>
+
         <tr>
           <th>Nombre</th>
           <th>Decripcion</th>
@@ -20,9 +24,9 @@ function PostsList() {
         </tr>
         {posts.tableRowsPosts != undefined && posts.tableRowsPosts.length != 0 ? (
           posts.tableRowsPosts.map((post) => {
-            let { name, description } = post;
+            let { postid, name, description } = post;
             return (
-              <tr>
+              <tr key = {postid}>
                 <td>{name}</td>
                 <td>{description}</td>
                 <td>
@@ -39,8 +43,9 @@ function PostsList() {
             );
           })
         ) : (
-          <div></div>
+          null
         )}
+        </tbody>
       </table>
     </div>
   );
